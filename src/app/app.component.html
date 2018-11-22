@@ -1,0 +1,51 @@
+<div class="container vertical-center">
+  <div class="card justify-content-center  col-md-12 ">
+    <form class="search-form">
+      <div class="form-group mt-5">
+        <label for="addressInput">Address</label>
+        <input
+          [formControl]="address"
+          id="addressInput"
+          type="text"
+          class="google-place-input form-control"
+          google-place
+          (onSelect)="setAddress($event)"
+          placeholder="Type to search.."
+          (keydown.enter)="$event.preventDefault()"
+        />
+        <div
+          class="error"
+          *ngIf="
+            address.invalid &&
+            address.errors &&
+            (address.dirty || address.touched)
+          "
+        >
+          Please enter a valid address
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="latitude">Latitude</label>
+        <input
+          [formControl]="lat"
+          type="text"
+          class="form-control"
+          id="latitude"
+          placeholder=""
+          disabled
+        />
+      </div>
+      <div class="form-group">
+        <label for="longitude">Longitude</label>
+        <input
+          [formControl]="lng"
+          type="text"
+          class="form-control"
+          id="longitude"
+          placeholder=""
+          disabled
+        />
+      </div>
+    </form>
+  </div>
+</div>

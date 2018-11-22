@@ -13,16 +13,6 @@
           placeholder="Type to search.."
           (keydown.enter)="$event.preventDefault()"
         />
-        <div
-          class="error"
-          *ngIf="
-            address.invalid &&
-            address.errors &&
-            (address.dirty || address.touched)
-          "
-        >
-          Please enter a valid address
-        </div>
       </div>
       <div class="form-group">
         <label for="latitude">Latitude</label>

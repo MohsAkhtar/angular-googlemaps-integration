@@ -20,34 +20,6 @@ export class GooglePlacesDirective implements OnInit {
     this.element = elRef.nativeElement;
   }
 
-  // getFormattedAddress(place) {
-  //   // @params: place - Google Autocomplete place object
-  //   // @returns: location_obj - An address object in human readable format
-  //   let location_obj = {};
-  //   // tslint:disable-next-line:forin
-  //   for (let i in place.address_components) {
-  //     let item = place.address_components[i];
-
-  //     location_obj['formatted_address'] = place.formatted_address;
-
-  //     if (item['types'].indexOf('locality') > -1) {
-  //       location_obj['locality'] = item['long_name'];
-  //     } else if (item['types'].indexOf('administrative_area_level_1') > -1) {
-  //       location_obj['admin_area_l1'] = item['short_name'];
-  //     } else if (item['types'].indexOf('street_number') > -1) {
-  //       location_obj['street_number'] = item['short_name'];
-  //     } else if (item['types'].indexOf('route') > -1) {
-  //       location_obj['route'] = item['long_name'];
-  //     } else if (item['types'].indexOf('country') > -1) {
-  //       location_obj['country'] = item['long_name'];
-  //     } else if (item['types'].indexOf('postal_code') > -1) {
-  //       location_obj['postal_code'] = item['short_name'];
-  //     }
-  //   }
-  //   console.log(location_obj);
-  //   return location_obj;
-  // }
-
   getGeoAddress(place) {
     // @params: place - Google Autocomplete place object
     // @returns: location_obj - An address object in human readable format
@@ -55,12 +27,15 @@ export class GooglePlacesDirective implements OnInit {
     const location_obj = {};
 
     location_obj['formatted_address'] = place.formatted_address;
-    if (place.geometry.location === -1) {
-      console.log('hi');
-    }
-    location_obj['lat'] = place.geometry.location.lat();
-    location_obj['lng'] = place.geometry.location.lng();
 
+    try {
+      location_obj['lat'] = place.geometry.location.lat();
+      location_obj['lng'] = place.geometry.location.lng();
+    } catch (e) {
+      console.log(e instanceof TypeError); // true
+      console.log(e.message); // "Hello"
+      console.log(e.name); // "TypeError"
+    }
     console.log(location_obj);
     return location_obj;
   }

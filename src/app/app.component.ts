@@ -1,5 +1,10 @@
 import { Component, NgZone } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  FormControl,
+  Validators,
+  ValidationErrors,
+  ValidatorFn
+} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +19,8 @@ export class AppComponent {
 
   // Method to be invoked everytime we receive a new instance
   // of the address object from the onSelect event emitter.
-  setAddress(addrObj) {
-    this.lat.setValue(addrObj['lat']);
-    this.lng.setValue(addrObj['lng']);
-    console.log(addrObj);
+  setAddress(addressObj: object) {
+    this.lat.setValue(addressObj['lat']);
+    this.lng.setValue(addressObj['lng']);
   }
-
-  constructor(private zone: NgZone) {}
 }
